@@ -63,6 +63,13 @@ Hash dihitung langsung dari berkas hasil ekstraksi dengan SHA-256, kemudian diba
 - Kriteria selesai: seluruh matriks visual diperiksa dan lint/unit/build/E2E lulus, atau hambatan dilaporkan secara eksplisit.
 - Commit setelah tahap selesai: `test: validate visual parity and voting regressions`.
 
+## Status implementasi
+
+- Tahap 1 selesai: `44552d1` menyimpan handover dan rencana.
+- Tahap 2 selesai: `038e4a3` menyamakan kerangka, logo, beranda, panduan, dan CSS.
+- Tahap 3 selesai: `a598543` menyamakan lima layar pemilihan; 20 tes unit/komponen lulus.
+- Tahap 4 selesai: 28 kombinasi perbandingan geometri/teks/warna terhadap sumber, total 36 tes browser, lint, 20 tes unit/komponen, dan build lulus. Rincian serta batas klaim ada di [`validation.md`](validation.md).
+
 ## Kebijakan commit dan pengiriman
 
 Buat commit terpisah setiap tahap/fitur selesai dan tervalidasi; jangan menggabungkan seluruh pekerjaan menjadi satu commit akhir. Jangan memasukkan perubahan yang tidak terkait. Setelah semua tahap selesai, pemeriksaan terakhir lulus, dan riwayat commit ditinjau, push seluruh commit ke remote pada akhir pekerjaan. Dokumen ini merupakan rencana, bukan klaim bahwa tahap implementasi atau pengujian sudah selesai.
