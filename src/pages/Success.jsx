@@ -1,12 +1,20 @@
-import { CircleCheck, ShieldCheck, House } from 'lucide-react'
+import { Check, CircleCheck, Clock3 } from 'lucide-react'
 
 export default function Success({ onHome }) {
   return (
-    <>
-      <div className="success-heading"><span className="success-icon"><CircleCheck size={38} aria-hidden="true" /></span><span className="eyebrow">SIMULASI SELESAI</span><h1>Terima kasih<br />sudah memilih!</h1><p>Suara demo berhasil dicatat di sesi ini. Partisipasimu adalah langkah untuk OSIS yang lebih baik.</p></div>
-      <section className="card receipt" aria-labelledby="receipt-title"><span className="eyebrow">BUKTI MEMILIH</span><h2 id="receipt-title">Pemilos Spenthree 2026</h2><div className="receipt-code">PM-2026-DEMO</div><span className="receipt-status"><CircleCheck size={14} aria-hidden="true" />Sudah memilih · Simulasi</span><p>Bukti ini tidak menampilkan kandidat pilihanmu.</p></section>
-      <aside className="notice"><ShieldCheck size={21} aria-hidden="true" /><p>Sesi demo ini sudah terkunci untuk pemilihan ulang. Gunakan <strong>Ulangi demo</strong> jika ingin mencoba dari awal. Suara tidak dikirim ke sekolah.</p></aside>
-      <button className="button secondary full" onClick={onHome}><House size={17} aria-hidden="true" />Kembali ke beranda</button>
-    </>
+    <section className="page" data-screen="success">
+      <div className="success-icon"><Check aria-hidden="true" /></div>
+      <div className="kicker">Pemilihan selesai</div>
+      <h1>Terima kasih<br />sudah memilih.</h1>
+      <p className="desc">Suara simulasi berhasil dicatat. Kamu sudah menyelesaikan alur pemilihan.</p>
+      <div className="receipt">
+        <div className="kicker">Bukti partisipasi · Demo</div>
+        <strong>PM-2026-DEMO</strong>
+        <div className="status"><CircleCheck aria-hidden="true" />Sudah menggunakan hak pilih</div>
+        <p>Bukti partisipasi tidak menampilkan kandidat pilihanmu.</p>
+      </div>
+      <div className="note"><Clock3 aria-hidden="true" /><span>Pada pemilihan sebenarnya, hasil diumumkan panitia setelah pemungutan suara selesai.</span></div>
+      <button type="button" className="primary" data-page="home" style={{ marginTop: 25 }} onClick={onHome}>Kembali ke beranda</button>
+    </section>
   )
 }

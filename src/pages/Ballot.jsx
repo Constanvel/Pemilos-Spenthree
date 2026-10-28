@@ -1,26 +1,31 @@
-import { ArrowRight, Check, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import { candidates, findCandidate } from '../data/candidates.js'
-import CandidateIdentity from '../components/CandidateIdentity.jsx'
+import VotingProgress from '../components/VotingProgress.jsx'
 
 export default function Ballot({ selected, dispatch }) {
   const choice = findCandidate(selected)
   return (
-    <>
-      <div className="page-heading"><span className="eyebrow">LANGKAH 2 DARI 3</span><h1>Kenali, lalu pilih.</h1><p>Baca profil dan program para calon. Pilih satu kandidat yang sesuai harapanmu.</p></div>
-      <fieldset className="ballot"><legend className="sr-only">Pilih satu kandidat ketua OSIS</legend>
-        {candidates.map((candidate) => (
-          <article className={`card candidate${selected === candidate.id ? ' chosen' : ''}`} key={candidate.id}>
-            <CandidateIdentity candidate={candidate} />
-            <p className="candidate-vision">“{candidate.vision}”</p>
-            <div className="candidate-actions"><button className="text-button" onClick={() => dispatch({ type: 'profile', id: candidate.id })} aria-label={`Lihat profil ${candidate.name}`}>Lihat profil<ArrowRight size={14} aria-hidden="true" /></button>
-              <label className="radio-label"><input type="radio" name="candidate" value={candidate.id} checked={selected === candidate.id} onChange={() => dispatch({ type: 'select', id: candidate.id })} /><span>Pilih {candidate.name}</span></label>
-            </div>
-          </article>
-        ))}
-      </fieldset>
-      <div className="selection-summary" role="status">{choice ? <><Check size={17} aria-hidden="true" /><span>Pilihan sementara: <strong>{choice.name}</strong></span></> : <span>Belum ada kandidat yang dipilih.</span>}</div>
-      <button className="button primary full" disabled={!choice} onClick={() => dispatch({ type: 'navigate', screen: 'confirm' })}>Lanjutkan<ArrowRight size={17} aria-hidden="true" /></button>
-      <aside className="notice"><ShieldCheck size={20} aria-hidden="true" /><p>Pilihanmu belum dikirim. Kamu masih dapat mengubahnya di langkah berikutnya.</p></aside>
-    </>
+    <section className="page" data-screen="ballot">
+      <VotingProgress step="ballot" />
+      <h2>Surat suara</h2>
+      <p className="desc">Pilih satu calon ketua OSIS. Kamu bisa membaca visi-misi terlebih dahulu.</p>
+      <form onSubmit={(event) => { event.preventDefault(); if (choice) dispatch({ type: 'navigate', screen: 'confirm' }) }}>
+        <fieldset id="pv-candidates">
+          <legend>Seluruh kandidat berikut adalah contoh.</legend>
+          {candidates.map((candidate) => (
+            <article className={`candidate${selected === candidate.id ? ' chosen' : ''}`} data-card={candidate.id} key={candidate.id}>
+              <label>
+                <span className="initials">{candidate.initials}</span>
+                <span className="meta"><span className="kicker">Nomor urut {candidate.id}</span><h3 id={`pv-candidate-name-${candidate.id}`}>{candidate.name}</h3><p>Kelas {candidate.classroom} · Contoh</p></span>
+                <input type="radio" name="pv-choice" value={candidate.id} aria-label={`Pilih nomor ${candidate.id}, ${candidate.name}`} checked={selected === candidate.id} onChange={() => dispatch({ type: 'select', id: candidate.id })} />
+              </label>
+              <button type="button" className="quiet" data-profile={candidate.id} onClick={() => dispatch({ type: 'profile', id: candidate.id })} aria-labelledby={`pv-profile-link-${candidate.id} pv-candidate-name-${candidate.id}`}><span id={`pv-profile-link-${candidate.id}`}>Lihat visi &amp; misi</span> <ChevronRight aria-hidden="true" /></button>
+            </article>
+          ))}
+        </fieldset>
+        <p className="selection" id="pv-selection" aria-live="polite">{choice ? `Pilihan sementara: ${choice.name}` : 'Belum ada kandidat yang dipilih.'}</p>
+        <button type="submit" className="primary" id="pv-next" disabled={!choice}>Lanjutkan <ArrowRight aria-hidden="true" /></button>
+      </form>
+    </section>
   )
 }

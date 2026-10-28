@@ -1,17 +1,24 @@
-import { ArrowLeft, LockKeyhole, Send } from 'lucide-react'
+import { ArrowLeft, LockKeyhole, Vote } from 'lucide-react'
 import CandidateIdentity from '../components/CandidateIdentity.jsx'
+import VotingProgress from '../components/VotingProgress.jsx'
 
 export default function Confirm({ candidate, agreed, dispatch }) {
   return (
-    <>
-      <div className="page-heading"><span className="eyebrow">LANGKAH 3 DARI 3</span><h1>Periksa pilihanmu.</h1><p>Pastikan kandidat di bawah ini adalah pilihanmu sebelum mengirim suara.</p></div>
-      <section className="card"><p className="eyebrow choice-label">PILIHANMU</p><CandidateIdentity candidate={candidate} /><p className="candidate-vision">“{candidate.vision}”</p><button className="text-button" onClick={() => dispatch({ type: 'navigate', screen: 'ballot' })}><ArrowLeft size={15} aria-hidden="true" />Ubah pilihan</button></section>
-      <aside className="notice"><LockKeyhole size={20} aria-hidden="true" /><p>Setelah dikirim, pilihan tidak dapat diubah pada sesi demo ini. Bukti memilih tidak menampilkan kandidat pilihanmu.</p></aside>
-      <form className="confirm-form" onSubmit={(event) => { event.preventDefault(); dispatch({ type: 'submit' }) }}>
-        <label className="consent"><input type="checkbox" checked={agreed} onChange={(event) => dispatch({ type: 'agree', value: event.target.checked })} /><span>Saya sudah memeriksa dan yakin dengan pilihan saya.</span></label>
-        <button type="submit" className="button primary full" disabled={!agreed}>Kirim suara demo<Send size={16} aria-hidden="true" /></button>
+    <section className="page" data-screen="confirm">
+      <button type="button" className="back" data-page="ballot" onClick={() => dispatch({ type: 'navigate', screen: 'ballot' })}><ArrowLeft aria-hidden="true" />Ubah pilihan</button>
+      <VotingProgress step="confirm" />
+      <h2>Periksa pilihanmu</h2>
+      <p className="desc">Kamu akan memberikan suara kepada:</p>
+      <div className="box"><CandidateIdentity candidate={candidate} confirmation /></div>
+      <div className="note"><LockKeyhole aria-hidden="true" /><span>Setelah dikirim, pilihan dikunci pada sesi demo ini. Pastikan kandidat sudah sesuai.</span></div>
+      <form onSubmit={(event) => { event.preventDefault(); dispatch({ type: 'submit' }) }}>
+        <label className="checklabel"><input type="checkbox" id="pv-agree" checked={agreed} onChange={(event) => dispatch({ type: 'agree', value: event.target.checked })} /><span>Saya sudah memeriksa dan yakin dengan pilihan saya.</span></label>
+        <div className="stack">
+          <button type="submit" className="primary" id="pv-vote" disabled={!agreed}><Vote aria-hidden="true" />Kirim suara</button>
+          <button type="button" className="secondary" data-page="ballot" onClick={() => dispatch({ type: 'navigate', screen: 'ballot' })}>Kembali memilih</button>
+        </div>
       </form>
-      <p className="muted small centered">Simulasi saja. Tidak ada suara yang dikirim ke sekolah.</p>
-    </>
+      <p className="helper" style={{ textAlign: 'center' }}>Simulasi. Tidak masuk ke perhitungan suara sekolah.</p>
+    </section>
   )
 }

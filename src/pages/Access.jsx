@@ -1,20 +1,23 @@
-import { ArrowRight, KeyRound, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, ShieldCheck } from 'lucide-react'
 import { DEMO_CODE } from '../state/election.js'
 
 export default function Access({ code, error, dispatch }) {
   return (
-    <>
-      <div className="page-heading"><span className="eyebrow">LANGKAH 1 DARI 3</span><h1>Akses pemilih</h1><p>Masukkan kode untuk membuka surat suara simulasi.</p></div>
-      <form className="card access-form" onSubmit={(event) => { event.preventDefault(); dispatch({ type: 'authorize' }) }}>
-        <span className="step-icon"><KeyRound size={23} aria-hidden="true" /></span>
-        <label htmlFor="access-code">Kode akses</label>
-        <input id="access-code" type="text" autoComplete="off" autoCapitalize="characters" spellCheck={false} placeholder="Masukkan kode akses" value={code} onChange={(event) => dispatch({ type: 'code', value: event.target.value })} aria-invalid={Boolean(error)} aria-describedby={`code-help${error ? ' code-error' : ''}`} />
-        <p id="code-help" className="muted">Gunakan <strong>{DEMO_CODE}</strong> untuk mencoba.</p>
-        {error && <p className="error" id="code-error" role="alert">{error}</p>}
-        <button type="submit" className="button primary full">Buka surat suara<ArrowRight size={17} aria-hidden="true" /></button>
-        <button type="button" className="text-button" onClick={() => dispatch({ type: 'code', value: DEMO_CODE })}>Isi kode demo otomatis</button>
+    <section className="page" data-screen="access">
+      <button type="button" className="back" data-page="home" onClick={() => dispatch({ type: 'navigate', screen: 'home' })}><ArrowLeft aria-hidden="true" />Kembali</button>
+      <div className="kicker">Langkah 01</div>
+      <h1>Kode pemilih</h1>
+      <p className="desc">Masukkan kode untuk membuka surat suara.</p>
+      <form onSubmit={(event) => { event.preventDefault(); dispatch({ type: 'authorize' }) }}>
+        <label className="field" htmlFor="pv-token">Kode akses</label>
+        <input id="pv-token" type="text" placeholder="Masukkan kode" autoComplete="off" autoCapitalize="characters" spellCheck={false} value={code} onChange={(event) => dispatch({ type: 'code', value: event.target.value })} aria-invalid={Boolean(error)} aria-describedby={`pv-code-help${error ? ' pv-access-error' : ''}`} />
+        <p className="helper" id="pv-code-help">Untuk mencoba prototipe, gunakan <b>{DEMO_CODE}</b>.</p>
+        <button type="button" className="quiet" id="pv-fill" onClick={() => dispatch({ type: 'code', value: DEMO_CODE })}>Gunakan kode demo <ArrowUpRight aria-hidden="true" /></button>
+        <p className="error" role="alert" id="pv-access-error" hidden={!error}>{error}</p>
+        <button type="submit" className="primary" id="pv-login" style={{ marginTop: 15 }}>Buka surat suara <ArrowRight aria-hidden="true" /></button>
       </form>
-      <aside className="notice"><ShieldCheck size={21} aria-hidden="true" /><p>Tidak perlu nama, NIS, atau data pribadi. Kode ini hanya untuk simulasi, bukan akses pemilihan resmi.</p></aside>
-    </>
+      <div className="box"><h3>Belum punya kode?</h3><p>Pada layanan sebenarnya, kode diberikan oleh panitia pemilihan. Jangan membagikan kode kepada siswa lain.</p></div>
+      <div className="note"><ShieldCheck aria-hidden="true" /><span>Demo ini tidak memerlukan NIS, kata sandi, atau data pribadi.</span></div>
+    </section>
   )
 }

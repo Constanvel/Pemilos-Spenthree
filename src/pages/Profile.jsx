@@ -1,17 +1,17 @@
-import { ArrowLeft, Check, Target, ListChecks } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import CandidateIdentity from '../components/CandidateIdentity.jsx'
 
 export default function Profile({ candidate, dispatch }) {
   return (
-    <>
-      <button className="text-button back-button" onClick={() => dispatch({ type: 'navigate', screen: 'ballot' })}><ArrowLeft size={16} aria-hidden="true" />Kembali ke surat suara</button>
-      <div className="page-heading"><span className="eyebrow">KENALI KANDIDAT</span><h1>Profil calon ketua OSIS</h1></div>
-      <section className="card profile"><CandidateIdentity candidate={candidate} />
-        <h3><Target size={17} aria-hidden="true" />Visi</h3><p>{candidate.vision}</p>
-        <h3><ListChecks size={17} aria-hidden="true" />Program utama</h3><ol className="programs">{candidate.programs.map((program) => <li key={program}>{program}</li>)}</ol>
-      </section>
-      <button className="button primary full" onClick={() => dispatch({ type: 'select', id: candidate.id })}><Check size={17} aria-hidden="true" />Pilih {candidate.name}</button>
-      <p className="muted small centered">Profil dan program merupakan data contoh untuk simulasi.</p>
-    </>
+    <section className="page" data-screen="profile">
+      <button type="button" className="back" data-page="ballot" onClick={() => dispatch({ type: 'navigate', screen: 'ballot' })}><ArrowLeft aria-hidden="true" />Semua kandidat</button>
+      <div className="kicker">Profil kandidat · Contoh</div>
+      <CandidateIdentity candidate={candidate} />
+      <div className="box"><h3>Visi</h3><p id="pv-vision">{candidate.vision}</p></div>
+      <h3>Misi &amp; program</h3>
+      <ol className="programs" id="pv-programs">{candidate.programs.map((program) => <li key={program}>{program}</li>)}</ol>
+      <button type="button" className="primary" id="pv-select-profile" style={{ marginTop: 22 }} onClick={() => dispatch({ type: 'select', id: candidate.id })}>Pilih kandidat ini</button>
+      <p className="helper" style={{ textAlign: 'center' }}>Pilihan masih bisa diubah sebelum dikonfirmasi.</p>
+    </section>
   )
 }
