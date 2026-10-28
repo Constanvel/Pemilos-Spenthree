@@ -1,0 +1,78 @@
+/* Product tokens mirror the supplied HTML proof of concept. */
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color-scheme: light dark;
+  --p-bg: light-dark(#f3f7f4, #17251f);
+  --p-card: light-dark(#fff, #22362d);
+  --p-ink: light-dark(#243b32, #edf7f1);
+  --p-muted: light-dark(#667c70, #b0c6ba);
+  --p-line: light-dark(#dce7df, #3c5446);
+  --p-soft: light-dark(#e6f0e9, #304b3e);
+  --p-accent: light-dark(#176b52, #a4dec4);
+  --p-brand: #176b52;
+  color: var(--p-ink);
+  background: var(--p-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 280px; padding: 24px 12px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button, input { -webkit-tap-highlight-color: transparent; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--p-accent); outline-offset: 4px; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: 28px; line-height: 1.18; letter-spacing: -.8px; }
+h2 { font-size: 18px; line-height: 1.35; letter-spacing: -.3px; }
+h3 { font-size: 14px; line-height: 1.4; }
+p { font-size: 13px; line-height: 1.65; }
+.app-shell { width: 100%; max-width: 410px; margin: 0 auto; border: 1px solid var(--p-line); border-radius: 24px; background: var(--p-bg); overflow: hidden; box-shadow: 0 14px 50px #102d1c0a; }
+.head { display: flex; align-items: center; gap: 10px; padding: 20px 20px 17px; background: var(--p-card); }
+.school-mark { display: grid; place-items: center; width: 44px; height: 48px; flex-shrink: 0; border: 1px solid var(--p-line); border-radius: 12px; color: var(--p-accent); background: var(--p-soft); }
+.head strong { display: block; font-size: 16px; letter-spacing: -.3px; }
+.head div > span { display: block; color: var(--p-muted); font-size: 11px; margin-top: 4px; }
+.demo-tag { margin-left: auto; color: var(--p-accent); border: 1px solid var(--p-line); background: var(--p-soft); padding: 5px 7px; border-radius: 5px; font-size: 9px; font-weight: 700; letter-spacing: .6px; }
+.nav { display: flex; padding: 0 14px 12px; gap: 4px; border-bottom: 1px solid var(--p-line); background: var(--p-card); }
+.nav button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 3px; border: 0; border-radius: 9px; background: transparent; color: var(--p-muted); font-size: 11px; font-weight: 600; }
+.nav button[aria-current] { color: var(--p-accent); background: var(--p-soft); }
+main { padding: 24px 20px; min-height: 420px; }
+main:focus { outline: none; }
+main > * + * { margin-top: 20px; }
+.page-heading .eyebrow { display: block; margin-bottom: 10px; }
+.page-heading p { margin-top: 12px; color: var(--p-muted); }
+.eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 1.1px; color: var(--p-accent); line-height: 1.6; }
+.hero { position: relative; padding: 24px; background: var(--p-brand); color: white; border-radius: 18px; overflow: hidden; }
+.hero::after { content: ''; position: absolute; width: 180px; height: 180px; border: 28px solid #ffffff08; border-radius: 50%; right: -105px; top: -70px; pointer-events: none; }
+.hero-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 14px; background: #ffffff1a; margin-bottom: 20px; }
+.badge { font-size: 9px; letter-spacing: 1.4px; font-weight: 700; color: #d1efdf; }
+.hero h2 { font-size: 27px; line-height: 1.18; letter-spacing: -.6px; margin: 9px 0 12px; }
+.hero p { color: #e1f1e9; font-size: 12px; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; border: 1px solid transparent; border-radius: 10px; padding: 12px 16px; font-size: 13px; font-weight: 700; line-height: 1.4; }
+.hero-button { background: #fff; color: #176b52; width: 100%; margin-top: 22px; justify-content: space-between; }
+.primary { background: var(--p-brand); color: #fff; }
+.secondary { color: var(--p-accent); background: var(--p-card); border-color: var(--p-line); }
+.full { width: 100%; }
+.notice { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--p-line); border-radius: 12px; background: var(--p-soft); color: var(--p-muted); }
+.notice > svg { flex-shrink: 0; color: var(--p-accent); margin-top: 2px; }
+.notice p { font-size: 11px; }
+.notice strong { color: var(--p-ink); }
+.section-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.section-heading h2 { font-size: 15px; }
+.muted { color: var(--p-muted); }
+.small { font-size: 10px; }
+.steps { list-style: none; padding: 0; margin: 18px 0 0; }
+.steps li { display: flex; gap: 13px; padding: 13px 0; }
+.steps li + li { border-top: 1px solid var(--p-line); }
+.step-icon { flex-shrink: 0; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: var(--p-soft); color: var(--p-accent); }
+.steps .eyebrow { font-size: 8px; }
+.steps h3 { margin: 2px 0 4px; font-size: 13px; }
+.steps p { color: var(--p-muted); font-size: 11px; }
+.card { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 14px; padding: 18px; }
+.plain-list { padding-left: 17px; margin: 10px 0 0; font-size: 12px; line-height: 1.7; }
+.plain-list li + li { margin-top: 8px; }
+footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 17px 20px; border-top: 1px solid var(--p-line); color: var(--p-muted); font-size: 9px; }
+footer button { display: inline-flex; align-items: center; gap: 4px; padding: 4px 0; border: 0; background: transparent; color: var(--p-accent); font-size: 10px; }
+@media (max-width: 360px) { body { padding: 8px; } main { padding: 22px 16px; } .head { padding-inline: 16px; } .section-heading { align-items: flex-start; flex-direction: column; gap: 4px; } }
+@media (prefers-reduced-motion: no-preference) { .button, .nav button { transition: background-color .15s, opacity .15s; } .button:hover:not(:disabled) { filter: brightness(.96); } }
