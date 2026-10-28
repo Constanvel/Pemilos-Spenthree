@@ -1,0 +1,3 @@
+# Preserve the supplied handover byte-for-byte, including its security wrapper.
+reference/frontend/** -text
+*.png binary

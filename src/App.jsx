@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useRef } from 'react'
-import { BookOpen, GraduationCap, House, RotateCcw, Vote } from 'lucide-react'
+import { BookOpen, House, Vote } from 'lucide-react'
+import schoolLogo from './assets/logo-sekolah-1.png'
 import Home from './pages/Home.jsx'
 import Guide from './pages/Guide.jsx'
 import Access from './pages/Access.jsx'
@@ -24,23 +25,25 @@ export default function App() {
   const onVote = () => navigate('access')
   const activeTab = ['ballot', 'profile', 'confirm', 'success'].includes(screen) ? 'access' : screen
   return (
-    <div className="app-shell">
-      <header className="head"><span className="school-mark" aria-hidden="true"><GraduationCap size={28} /></span><div><strong>Pemilos Spenthree</strong><span>SMP Negeri 3 Sokaraja</span></div><span className="demo-tag">DEMO</span></header>
-      <nav className="nav" aria-label="Navigasi utama">
-        {[['home', House, 'Beranda'], ['access', Vote, voted ? 'Bukti memilih' : 'Surat suara'], ['guide', BookOpen, 'Panduan']].map(([id, Icon, label]) => (
-          <button key={id} aria-current={activeTab === id ? 'page' : undefined} onClick={() => navigate(id)}><Icon size={17} aria-hidden="true" />{label}</button>
-        ))}
-      </nav>
+    <div id="pv-stage">
+    <div id="pv-app" aria-label="Prototipe pemilihan ketua OSIS SMP Negeri 3 Sokaraja">
+      <header className="head"><img src={schoolLogo} alt="Logo SMP Negeri 3 Sokaraja" /><div><div className="brand">Pemilos Spenthree</div><div className="subtitle">SMP Negeri 3 Sokaraja</div></div><span className="badge">DEMO</span></header>
       <main ref={contentRef} tabIndex={-1}>
         {screen === 'home' && <Home onVote={onVote} voted={voted} />}
-        {screen === 'guide' && <Guide onVote={onVote} voted={voted} />}
+        {screen === 'guide' && <Guide />}
         {screen === 'access' && <Access code={state.code} error={state.error} dispatch={dispatch} />}
         {screen === 'ballot' && <Ballot selected={state.selected} dispatch={dispatch} />}
         {screen === 'profile' && <Profile candidate={findCandidate(state.profileId)} dispatch={dispatch} />}
         {screen === 'confirm' && <Confirm candidate={findCandidate(state.selected)} agreed={state.agreed} dispatch={dispatch} />}
         {screen === 'success' && <Success onHome={() => navigate('home')} />}
       </main>
-      <footer><span>Prototipe · Kandidat &amp; data contoh</span><button onClick={() => dispatch({ type: 'reset' })}><RotateCcw size={13} aria-hidden="true" />Ulangi demo</button></footer>
+      <nav aria-label="Menu pemilihan">
+        {[['home', House, 'Beranda'], ['access', Vote, voted ? 'Bukti memilih' : 'Surat suara'], ['guide', BookOpen, 'Panduan']].map(([id, Icon, label]) => (
+          <button key={id} aria-current={activeTab === id ? 'page' : undefined} onClick={() => navigate(id)}><Icon aria-hidden="true" />{label}</button>
+        ))}
+      </nav>
+      <div className="demo-footer"><span>Prototipe · Kandidat &amp; data contoh</span><button onClick={() => dispatch({ type: 'reset' })}>Ulangi demo</button></div>
+    </div>
     </div>
   )
 }
