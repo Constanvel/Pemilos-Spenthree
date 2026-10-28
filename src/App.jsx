@@ -5,6 +5,8 @@ import Guide from './pages/Guide.jsx'
 import Access from './pages/Access.jsx'
 import Ballot from './pages/Ballot.jsx'
 import Profile from './pages/Profile.jsx'
+import Confirm from './pages/Confirm.jsx'
+import Success from './pages/Success.jsx'
 import { findCandidate } from './data/candidates.js'
 import { electionReducer, readSession, saveSession } from './state/election.js'
 
@@ -35,7 +37,8 @@ export default function App() {
         {screen === 'access' && <Access code={state.code} error={state.error} dispatch={dispatch} />}
         {screen === 'ballot' && <Ballot selected={state.selected} dispatch={dispatch} />}
         {screen === 'profile' && <Profile candidate={findCandidate(state.profileId)} dispatch={dispatch} />}
-        {screen === 'confirm' && <div className="page-heading"><h1>Periksa pilihanmu</h1><p>Konfirmasi suara sedang disiapkan.</p></div>}
+        {screen === 'confirm' && <Confirm candidate={findCandidate(state.selected)} agreed={state.agreed} dispatch={dispatch} />}
+        {screen === 'success' && <Success onHome={() => navigate('home')} />}
       </main>
       <footer><span>Prototipe · Kandidat &amp; data contoh</span><button onClick={() => dispatch({ type: 'reset' })}><RotateCcw size={13} aria-hidden="true" />Ulangi demo</button></footer>
     </div>

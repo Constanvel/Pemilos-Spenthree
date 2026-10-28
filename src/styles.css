@@ -76,6 +76,19 @@ footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: s
 footer button { display: inline-flex; align-items: center; gap: 4px; padding: 4px 0; border: 0; background: transparent; color: var(--p-accent); font-size: 10px; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .centered { text-align: center; }
+.choice-label { margin-bottom: 14px; }
+.confirm-form > * + * { margin-top: 20px; }
+.consent { display: flex; align-items: flex-start; gap: 11px; font-size: 12px; line-height: 1.7; cursor: pointer; }
+.consent input { margin-top: 2px; }
+.success-heading { text-align: center; }
+.success-heading .eyebrow { display: block; margin: 20px 0 10px; }
+.success-heading p { margin-top: 14px; color: var(--p-muted); }
+.success-icon { display: grid; place-items: center; width: 76px; height: 76px; margin: 0 auto; background: var(--p-soft); color: var(--p-accent); border-radius: 50%; }
+.receipt { text-align: center; }
+.receipt h2 { font-size: 16px; margin-top: 9px; }
+.receipt-code { padding: 17px 5px; margin: 20px 0 14px; border-block: 1px dashed var(--p-line); font-size: 21px; font-weight: 700; letter-spacing: 2px; color: var(--p-accent); }
+.receipt-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--p-accent); }
+.receipt p { font-size: 11px; color: var(--p-muted); margin-top: 14px; }
 .access-form { display: flex; flex-direction: column; gap: 14px; }
 .access-form label { font-size: 13px; font-weight: 700; margin-top: 5px; }
 .access-form input { width: 100%; border: 1px solid var(--p-line); border-radius: 9px; padding: 14px 12px; color: var(--p-ink); background: var(--p-bg); font-size: 14px; }
